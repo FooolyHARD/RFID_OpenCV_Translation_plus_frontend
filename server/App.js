@@ -9,6 +9,9 @@ const express = require('express'),
     port = 3333,
     app = express();
 const passport = require('./auth/passport');
+const node_media_server = require('./media_server');
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 mongoose.connect('mongodb://127.0.0.1/nodeStream' , { useNewUrlParser: true });
@@ -35,3 +38,4 @@ app.get('*', middleware.ensureLoggedIn(), (req, res) => {
 });
 
 app.listen(port, () => console.log(`App listening on ${port}!`));
+node_media_server.run();
